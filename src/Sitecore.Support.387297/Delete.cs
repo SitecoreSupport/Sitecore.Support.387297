@@ -1,11 +1,13 @@
-﻿    using Sitecore.Data.Items;
-    using Sitecore.Diagnostics;
-    using Sitecore.Shell.Framework;
-    using Sitecore.Web.UI.Sheer;
-    using System;
+﻿using Sitecore.Data.Items;
+using Sitecore.Diagnostics;
+using Sitecore.Shell.Framework;
+using Sitecore.Web.UI.Sheer;
+using System;
+using System.Web;
 
 namespace Sitecore.Shell.Framework.Commands
 {
+
     [Serializable]
     public class Delete : Command
     {
@@ -19,6 +21,8 @@ namespace Sitecore.Shell.Framework.Commands
             {
                 if (context.Items.Length == 1)
                 {
+                    HttpContext.Current.Session["content language"] = context.Items[0].Language != null ? context.Items[0].Language.ToString() : null;
+
                     object[] args = new object[] { context.Items[0].ID };
                     SheerResponse.Eval("if(this.Content && this.Content.loadNextSearchedItem){{this.Content.loadNextSearchedItem('{0}');}}", args);
                 }

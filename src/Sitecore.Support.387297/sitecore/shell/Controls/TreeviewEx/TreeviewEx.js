@@ -2,6 +2,17 @@
     Sitecore = new Object();
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+    let node = document.getElementById("Link_11111111111111111111111111111111");
+    if (node != null) {
+        let innerNode = node.getElementsBySelector("img.scContentTreeNodeGlyph");
+        if (innerNode != null) {
+            innerNode[0].click(this);
+            innerNode[0].click(this);
+        }
+    }
+});
+
 Sitecore.Treeview = new function () {
 };
 

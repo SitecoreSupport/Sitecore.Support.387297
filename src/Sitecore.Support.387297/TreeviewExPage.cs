@@ -1,15 +1,16 @@
-﻿    using Sitecore;
-    using Sitecore.Configuration;
-    using Sitecore.Data;
-    using Sitecore.Data.Items;
-    using Sitecore.Diagnostics;
-    using Sitecore.Globalization;
-    using Sitecore.Web;
-    using Sitecore.Web.UI.WebControls;
-    using System;
-    using System.Web.UI;
+﻿using Sitecore;
+using Sitecore.Configuration;
+using Sitecore.Data;
+using Sitecore.Data.Items;
+using Sitecore.Diagnostics;
+using Sitecore.Globalization;
+using Sitecore.Web;
+using Sitecore.Web.UI.WebControls;
+using System;
+using System.Web;
+using System.Web.UI;
 
-namespace Sitecore.Shell.Controls.TreeviewEx
+namespace Sitecore.Support.Shell.Controls.TreeviewEx
 {
     public class TreeviewExPage : Page
     {
@@ -25,7 +26,9 @@ namespace Sitecore.Shell.Controls.TreeviewEx
             Database database = Factory.GetDatabase(queryString);
             Assert.IsNotNull(database, queryString);
             ID itemId = ShortID.DecodeID(WebUtil.GetQueryString("id"));
-            string str2 = WebUtil.GetQueryString("la");
+            string str2 = HttpContext.Current.Session["content language"] != null ? HttpContext.Current.Session["content language"].ToString() : WebUtil.GetQueryString("la");
+            string languageSite = Sitecore.Context.Site.ContentLanguage.ToString();
+
             if (string.IsNullOrEmpty(str2) || !Language.TryParse(str2, out language))
             {
                 language = Sitecore.Context.Language;
